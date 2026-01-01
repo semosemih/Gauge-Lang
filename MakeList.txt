@@ -1,0 +1,4 @@
+I dont know what is a lexer
+I dont know what is a interpreter
+I dont know what is a parser
+I dont know what is a AST
