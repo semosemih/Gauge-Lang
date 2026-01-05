@@ -2,6 +2,7 @@
 #include "lexer.h"
 
 int main(){
+    //henuz buranin ne yaptigini bilmiyorum.
     std::string source = "let x = 5 + 3;";
     Lexer lexer(source);
 
