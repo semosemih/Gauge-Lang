@@ -10,6 +10,9 @@ std::vector<Token> Lexer::scanTokens(){
         start = current;
         scanToken();
     }
+
+    tokens.push_back({TokenType::EOF_TOKEN, "", line});
+    return tokens;
 }
 
 //keep going!
