@@ -16,7 +16,7 @@ NUMBER,
 
 //keywords
 LET,
-FUN,
+FUN,//in gpt it is fn
 
 EOF_TOKEN
 };
