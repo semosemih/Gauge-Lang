@@ -17,6 +17,7 @@ NUMBER,
 //keywords
 LET,
 FUN,//in gpt it is fn
+RETURN,
 
 EOF_TOKEN
 };
