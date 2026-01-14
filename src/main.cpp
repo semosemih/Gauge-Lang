@@ -2,8 +2,9 @@
 #include "lexer.h"
 
 int main(){
-    //henuz buranin ne yaptigini bilmiyorum.
-    std::string source = "let x = 5 + 3;";
+    std::string source = 
+    "let x = 5 + 3;"
+    "fun add(a, b) { return a + b; }";
     Lexer lexer(source);
 
     auto tokens = lexer.scanTokens();
