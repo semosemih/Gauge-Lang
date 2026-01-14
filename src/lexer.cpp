@@ -57,3 +57,16 @@ void Lexer::addToken(TokenType type){
     std::string text = source.substr(start, current - start);
     tokens.push_back({type,text,line});
 }
+
+char Lexer::peek() const{
+    if (isAtEnd()) return '\0';
+    return source[current];
+}
+
+bool Lexer::isAlpha(char c) const{//alpha stands for alphabet letter
+    return std::isalpha(static_cast<unsigned char>(c));
+}
+
+bool Lexer::isDigit(char c) const{
+    return std::isdigit(static_cast<unsigned char>(c));
+}

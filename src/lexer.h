@@ -21,4 +21,11 @@ private:
     bool isAtEnd() const;
 
     void addToken(TokenType type);
+
+    char peek() const;
+    bool isAlpha(char c) const;
+    bool isDigit(char c) const;
+
+    void identifier();
+    void number();
 };
