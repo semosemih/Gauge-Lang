@@ -1,6 +1,6 @@
 #include <iostream>
 #include "lexer.h"
-
+#include "parser.h"
 int main(){
     std::string source = 
     "let x = 5 + 3;"
@@ -13,5 +13,9 @@ int main(){
             << " : " << token.lexeme << std::endl;
     }
 
+    Parser parser(tokens);
+    auto ast = parser.parseExpression();
+
+    std::cout << "AST built successfully\n";
     return 0;
 }
