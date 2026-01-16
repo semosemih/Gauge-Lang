@@ -1,22 +1,36 @@
+//ABSTRACT SYNTAX TREE
 #pragma once
 #include <memory>
 #include <string>
 
-struct Expr{
-    virtual ~Expr() = default;
+struct Expr{//base class 
+    virtual ~Expr() = default;//in cpp, is we give default access, everyone can acces this struct publicly
+    virtual std::string print() const=0;
 };
 
-struct LiteralExpr : Expr{
+struct LiteralExpr : Expr{//child class of Expr
     std::string value;
-    LiteralExpr(std::string v) : value(std::move(v)){}
+    LiteralExpr(std::string v) : value(std::move(v)){}//move() stands for string transformation, not copying but moving
+
+    std::string print() const override{
+        return value;
+    }
 };
 
 struct BinaryExpr : Expr {
+    //for instance: "1 + 2"
+    //left is '1'
+    //operator is '+'
+    //right is '2'
     std::unique_ptr<Expr> left;
     std::string op;
     std::unique_ptr<Expr> right;
 
     BinaryExpr(std::unique_ptr<Expr> l, std::string o, std::unique_ptr<Expr> r) 
         : left(std::move(l)), op(std::move(o)), right(std::move(r)) {}
+
+    std::string print() const override{
+        return "(" + op  + " " + left->print() + " " + right->print() + ")";
+    }
 };
 

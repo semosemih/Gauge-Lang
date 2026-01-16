@@ -3,8 +3,7 @@
 #include "parser.h"
 int main(){
     std::string source = 
-    "let x = 5 + 3;"
-    "fun add(a, b) { return a + b; }";
+    "5 + 3 + 2";
     Lexer lexer(source);
 
     auto tokens = lexer.scanTokens();
@@ -16,6 +15,6 @@ int main(){
     Parser parser(tokens);
     auto ast = parser.parseExpression();
 
-    std::cout << "AST built successfully\n";
+    std::cout << ast->print() << std::endl;
     return 0;
 }
