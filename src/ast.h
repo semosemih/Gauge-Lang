@@ -8,7 +8,7 @@ struct Expr{//base class
     virtual std::string print() const=0;
 };
 
-struct LiteralExpr : Expr{//child class of Expr
+struct LiteralExpr : Expr{//child class of Expr VARIABLES LIKE 5, 412, "HELLO"
     std::string value;
     LiteralExpr(std::string v) : value(std::move(v)){}//move() stands for string transformation, not copying but moving
 

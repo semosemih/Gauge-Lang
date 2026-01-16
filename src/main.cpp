@@ -3,7 +3,7 @@
 #include "parser.h"
 int main(){
     std::string source = 
-    "5 + 3 + 2";
+    "(5 + 3) * 2";
     Lexer lexer(source);
 
     auto tokens = lexer.scanTokens();
