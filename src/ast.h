@@ -34,3 +34,14 @@ struct BinaryExpr : Expr {
     }
 };
 
+struct UnaryExpr : Expr{
+    std::string op;
+    std::unique_ptr<Expr> right;
+
+    UnaryExpr(std::string o, std::unique_ptr<Expr> r) 
+    : op(std::move(o)), right(std::move(r)){}
+
+    std::string print() const override{
+        return "(" + op + " " + right->print() + ")";
+    }
+};

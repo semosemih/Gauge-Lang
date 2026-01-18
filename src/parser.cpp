@@ -22,9 +22,6 @@ bool Parser::isAtEnd() const {
     return tokens[current].type == TokenType::EOF_TOKEN;
 }
 
-std::unique_ptr<Expr> Parser::parseExpression() {//whole expression
-    return parseTerm();
-}
 
 std::unique_ptr<Expr> Parser::parseTerm(){//plus and minus
     auto expr = parseFactor();
@@ -40,7 +37,7 @@ std::unique_ptr<Expr> Parser::parseTerm(){//plus and minus
 }
 
 std::unique_ptr<Expr> Parser::parseFactor(){//for star and slash operator
-    auto expr = parsePrimary();
+    auto expr = parseUnary();
 
     while (match(TokenType::STAR)){
         std::string op = previous().lexeme;
@@ -63,4 +60,32 @@ std::unique_ptr<Expr> Parser::parsePrimary(){//paranthesis and literal
         return expr;
     }
     return nullptr;
+}
+
+std::unique_ptr<Expr> Parser::parseUnary(){
+    if(match(TokenType::MINUS)){
+        std::string op = previous().lexeme;
+        auto right = parseUnary();
+        return std::make_unique<UnaryExpr>(op, std::move(right));
+    }
+    return parsePrimary();
+}
+
+std::unique_ptr<Expr> Parser::parseExpression(){
+    return parseComparison();
+}
+
+std::unique_ptr<Expr> Parser::parseComparison(){
+    auto expr = parseTerm();
+
+    while(match(TokenType::LESS) ||
+          match(TokenType::GREATER) ||
+          match(TokenType::EQUAL_EQUAL)){
+
+            std::string op = previous().lexeme;
+            auto right = parseTerm();
+            expr = std::make_unique<BinaryExpr>(
+                std::move(expr), op, std::move(right));
+          }
+          return expr;
 }

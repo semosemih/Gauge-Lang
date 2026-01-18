@@ -19,6 +19,7 @@ private:
     void scanToken();
     char advance();
     bool isAtEnd() const;
+    bool match(char expected);
 
     void addToken(TokenType type);
 

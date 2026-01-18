@@ -15,6 +15,14 @@ std::vector<Token> Lexer::scanTokens(){
     return tokens;
 }
 
+bool Lexer::match(char expected) {//match checks for the next char
+    if (isAtEnd()) return false;
+    if (source[current] != expected) return false;
+
+    current++;
+    return true;
+}
+
 void Lexer::scanToken(){//this function belongs to Lexer class and its name is scanToken
     char c = advance();
 
@@ -27,9 +35,18 @@ void Lexer::scanToken(){//this function belongs to Lexer class and its name is s
         case '-': addToken(TokenType::MINUS); break;
         case '*': addToken(TokenType::STAR); break;
         case '/': addToken(TokenType::SLASH); break;
-        case '=': addToken(TokenType::EQUAL); break;
+        case '=':
+            if (match('=')) {
+            addToken(TokenType::EQUAL_EQUAL);
+            } else {
+            addToken(TokenType::EQUAL);
+            }
+            break;
+
         case ';': addToken(TokenType::SEMICOLON); break;
         case ',': addToken(TokenType::COMMA); break;
+        case '<': addToken(TokenType::LESS); break;
+        case '>': addToken(TokenType::GREATER); break;
 
         case ' ':
         case '\r':

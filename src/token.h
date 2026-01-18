@@ -10,6 +10,7 @@ COMMA, SEMICOLON,
 PLUS, MINUS, STAR, SLASH,
 EQUAL,
 
+LESS, GREATER, EQUAL_EQUAL,
 //literals
 IDENTIFIER, //variables like x, ymin, player_health
 NUMBER,
