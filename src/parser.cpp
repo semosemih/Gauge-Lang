@@ -89,3 +89,24 @@ std::unique_ptr<Expr> Parser::parseComparison(){
           }
           return expr;
 }
+
+std::unique_ptr<Stmt> Parser::parseStatement() {
+    if (match(TokenType::LET)) {
+        return parseVarDeclaration();
+    }
+
+    auto expr = parseExpression();
+    match(TokenType::SEMICOLON);
+    return std::make_unique<ExprStmt>(std::move(expr));
+}
+
+std::unique_ptr<Stmt> Parser::parseVarDeclaration() {
+    advance(); // identifier
+    std::string name = previous().lexeme;
+
+    match(TokenType::EQUAL);
+    auto init = parseExpression();
+    match(TokenType::SEMICOLON);
+
+    return std::make_unique<VarStmt>(name, std::move(init));
+}

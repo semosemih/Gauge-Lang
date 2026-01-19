@@ -14,6 +14,9 @@ public:
     std::unique_ptr<Expr> parsePrimary();
     std::unique_ptr<Expr> parseUnary();
     std::unique_ptr<Expr> parseComparison();
+    std::unique_ptr<Stmt> parseStatement();
+    std::unique_ptr<Stmt> parseVarDeclaration();
+
 
 private:
     const std::vector<Token>& tokens;

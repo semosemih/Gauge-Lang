@@ -2,7 +2,7 @@
 #include "lexer.h"
 #include "parser.h"
 int main(){
-    std::string source = "5 + 3 > 2 * 4";
+    std::string source = "let x = 5 + 3 * 2;";
 
     Lexer lexer(source);
 

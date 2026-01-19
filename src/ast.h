@@ -45,3 +45,31 @@ struct UnaryExpr : Expr{
         return "(" + op + " " + right->print() + ")";
     }
 };
+
+struct Stmt {
+    virtual ~Stmt() = default;
+    virtual std::string print() const = 0;
+};
+
+struct ExprStmt : Stmt {
+    std::unique_ptr<Expr> expr;
+
+    ExprStmt(std::unique_ptr<Expr> e)
+        : expr(std::move(e)) {}
+
+    std::string print() const override {
+        return expr->print() + ";";
+    }
+};
+
+struct VarStmt : Stmt {
+    std::string name;
+    std::unique_ptr<Expr> initializer;
+
+    VarStmt(std::string n, std::unique_ptr<Expr> init)
+        : name(std::move(n)), initializer(std::move(init)) {}
+
+    std::string print() const override {
+        return "(let " + name + " " + initializer->print() + ")";
+    }
+};
