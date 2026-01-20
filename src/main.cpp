@@ -13,8 +13,12 @@ int main(){
     // }
 
     Parser parser(tokens);
-    auto ast = parser.parseExpression();
+    auto stmt = parser.parseStatement();
 
-    std::cout << ast->print() << std::endl;
+    if (stmt) {
+        std::cout << stmt->print() << std::endl;
+    } else {
+        std::cout << "Parsing failed." << std::endl;
+    }
     return 0;
 }
